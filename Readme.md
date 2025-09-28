@@ -4,19 +4,19 @@
 
 ---
 
-## a) Company
+## Company
 **Steppe Beats** is an online store for tracks and albums. Each customer has a dedicated support representative, and all sales are recorded through invoices.
 
-## b) Project description (in short)
+## Project description (in short)
 We perform SQL-based analytics on the **Chinook (PostgreSQL)** database: sales by country and customer, popularity of genres and artists, revenue trends, and support staff efficiency. Queries and results are reproducible; later we plan to add a web-based dashboard for visualization.
 
-## c) Main analytics screenshot
+## Main analytics screenshot
 Replace the placeholder with your own screenshot from pgAdmin or your dashboard:  
-![Main analytics](img/main_analytics.png)
+![Main analytics](img/tableRowsData.png)
 
 ---
 
-## d) How to run the project (step by step)
+## How to run the project 
 
 ### 1) Prepare the database (PostgreSQL)
 Create the database:
