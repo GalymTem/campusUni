@@ -23,6 +23,6 @@ Requirements
 PostgreSQL running locally
 Python 3.8+
 
-Dataset
+## Dataset
 This project used the **Chinook sample database** by Bryn Llewellyn.
 - Official GitHub repository: https://github.com/yugabyte/yugabyte-db/tree/master/sample
