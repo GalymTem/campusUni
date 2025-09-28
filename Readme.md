@@ -20,8 +20,8 @@ Replace the placeholder with your own screenshot from pgAdmin or your dashboard:
 ## To run the project 
 
 Requirements
-PostgreSQL running locally
-Python 3.8+
+- PostgreSQL running locally + psql
+- Python 3.8+
 
 ## Dataset
 This project used the **Chinook sample database** by Bryn Llewellyn.
