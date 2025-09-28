@@ -15,11 +15,14 @@ Replace the placeholder with your own screenshot from pgAdmin or your dashboard:
 ![Main analytics](tableRowsData.png)
 
 ---
-## ER diagaram
+## ER diagram
 ![ER diagram](ER_diagaram/chinook-er-diagram.png)
 ## How to run the project 
 
-### 1) Prepare the database (PostgreSQL)
-Create the database:
-```sql
-CREATE DATABASE chinook;
+Requirements
+PostgreSQL running locally
+Python 3.8+
+
+Dataset
+This project used the **Chinook sample database** by Bryn Llewellyn.
+- Official GitHub repository: https://github.com/yugabyte/yugabyte-db/tree/master/sample
