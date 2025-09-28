@@ -12,7 +12,7 @@ We perform SQL-based analytics on the **Chinook (PostgreSQL)** database: sales b
 
 ## Main analytics screenshot
 Replace the placeholder with your own screenshot from pgAdmin or your dashboard:  
-![Main analytics](img/tableRowsData.png)
+![Main analytics](tableRowsData.png)
 
 ---
 
