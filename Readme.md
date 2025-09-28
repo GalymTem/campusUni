@@ -17,7 +17,7 @@ Replace the placeholder with your own screenshot from pgAdmin or your dashboard:
 ---
 ## ER diagram
 ![ER diagram](ER_diagaram/chinook-er-diagram.png)
-## How to run the project 
+## To run the project 
 
 Requirements
 PostgreSQL running locally
