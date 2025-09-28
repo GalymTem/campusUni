@@ -15,7 +15,7 @@ Replace the placeholder with your own screenshot from pgAdmin or your dashboard:
 ![Main analytics](tableRowsData.png)
 
 ---
-## ER diagram
+## ER diagaram
 ![ER diagram](ER_diagram/chinook-er-diagram.png)
 ## How to run the project 
 
