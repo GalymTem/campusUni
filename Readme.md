@@ -16,7 +16,7 @@ Replace the placeholder with your own screenshot from pgAdmin or your dashboard:
 
 ---
 ## ER diagram
-![ER diagram](ER diagram/chinook-er-diagram.png)
+![ER diagram]([ER diagram/chinook-er-diagram.png](https://github.com/GalymTem/campusUni/blob/a7c91632e868832cf54f42002607fe9cdc77b4e1/ER%20diagram/chinook-er-diagram.png))
 ## How to run the project 
 
 ### 1) Prepare the database (PostgreSQL)
