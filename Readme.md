@@ -1,6 +1,6 @@
-# Steppe Beats Analytics
+# PULSE — Platform for Unified Learning & Streaming Evidence
 
-> Educational analytics project for the fictional company **Steppe Beats** — an international online retailer of digital music operating across several countries.
+> Educational analytics project for the fictional company **PULSE** — an international online retailer of digital music operating across several countries.
 
 ---
 
