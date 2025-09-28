@@ -1,0 +1,105 @@
+-- 1) Топ-10 стран по выручке.
+-- Суммируем продажи позиций инвойсов по BillingCountry.
+SELECT i."BillingCountry" AS country,
+       SUM(il."UnitPrice" * il."Quantity") AS revenue
+FROM "Invoice" i
+JOIN "InvoiceLine" il ON il."InvoiceId" = i."InvoiceId"
+GROUP BY country
+ORDER BY revenue DESC
+LIMIT 10;
+
+-- 2) Топ-10 клиентов по выручке.
+-- Сумма покупок на клиента (Invoice + InvoiceLine).
+SELECT c."CustomerId",
+       c."FirstName" || ' ' || c."LastName" AS customer,
+       SUM(il."UnitPrice" * il."Quantity") AS revenue
+FROM "Customer" c
+JOIN "Invoice" i  ON i."CustomerId" = c."CustomerId"
+JOIN "InvoiceLine" il ON il."InvoiceId" = i."InvoiceId"
+GROUP BY c."CustomerId", customer
+ORDER BY revenue DESC
+LIMIT 10;
+
+-- 3) Средний чек по странам (и кол-во инвойсов).
+-- Среднее значение поля Total по каждой стране, только где >=5 инвойсов.
+SELECT i."BillingCountry" AS country,
+       COUNT(*)           AS invoices_cnt,
+       AVG(i."Total")     AS avg_invoice_total
+FROM "Invoice" i
+GROUP BY country
+HAVING COUNT(*) >= 5
+ORDER BY avg_invoice_total DESC;
+
+-- 4) Выручка по артистам.
+-- Artist -> Album -> Track -> InvoiceLine, суммируем продажи.
+SELECT ar."Name" AS artist,
+       SUM(il."UnitPrice" * il."Quantity") AS revenue
+FROM "Artist" ar
+JOIN "Album"  al ON al."ArtistId" = ar."ArtistId"
+JOIN "Track"  t  ON t."AlbumId"   = al."AlbumId"
+JOIN "InvoiceLine" il ON il."TrackId" = t."TrackId"
+GROUP BY artist
+ORDER BY revenue DESC
+LIMIT 15;
+
+-- 5) Выручка по жанрам и кол-во проданных треков.
+-- Genre -> Track -> InvoiceLine.
+SELECT g."Name" AS genre,
+       SUM(il."UnitPrice" * il."Quantity") AS revenue,
+       COUNT(DISTINCT t."TrackId")         AS tracks_sold
+FROM "Genre" g
+JOIN "Track" t      ON t."GenreId" = g."GenreId"
+JOIN "InvoiceLine" il ON il."TrackId" = t."TrackId"
+GROUP BY genre
+ORDER BY revenue DESC;
+
+-- 6) Средняя и медианная длина трека по жанрам.
+-- Оценка качества/длины каталога в мс.
+SELECT g."Name" AS genre,
+       AVG(t."Milliseconds")::int AS avg_ms,
+       PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY t."Milliseconds")::int AS median_ms
+FROM "Track" t
+JOIN "Genre" g ON g."GenreId" = t."GenreId"
+GROUP BY genre
+ORDER BY avg_ms DESC;
+
+-- 7) Топ-10 треков по количеству проданных копий.
+-- Суммируем Quantity из InvoiceLine по Track.
+SELECT t."TrackId", t."Name" AS track,
+       SUM(il."Quantity") AS qty
+FROM "Track" t
+JOIN "InvoiceLine" il ON il."TrackId" = t."TrackId"
+GROUP BY t."TrackId", track
+ORDER BY qty DESC
+LIMIT 10;
+
+-- 8) Динамика выручки по месяцам.
+-- Округляем InvoiceDate до месяца и суммируем продажи.
+SELECT date_trunc('month', i."InvoiceDate") AS month,
+       SUM(il."UnitPrice" * il."Quantity") AS revenue
+FROM "Invoice" i
+JOIN "InvoiceLine" il ON il."InvoiceId" = i."InvoiceId"
+GROUP BY month
+ORDER BY month;
+
+-- 9) Выручка по сотрудникам поддержки.
+-- Через Customer.SupportRepId агрегируем продажи, привязанные к репу.
+SELECT e."EmployeeId",
+       e."FirstName" || ' ' || e."LastName" AS employee,
+       SUM(il."UnitPrice" * il."Quantity") AS revenue
+FROM "Employee" e
+JOIN "Customer" c ON c."SupportRepId" = e."EmployeeId"
+JOIN "Invoice"  i ON i."CustomerId"   = c."CustomerId"
+JOIN "InvoiceLine" il ON il."InvoiceId" = i."InvoiceId"
+GROUP BY e."EmployeeId", employee
+ORDER BY revenue DESC;
+
+-- 10) Глубина каталога по альбомам.
+-- Считаем кол-во треков и среднюю цену по каждому альбому.
+SELECT al."Title" AS album,
+       COUNT(t."TrackId") AS tracks_cnt,
+       AVG(t."UnitPrice") AS avg_price
+FROM "Album" al
+JOIN "Track" t ON t."AlbumId" = al."AlbumId"
+GROUP BY album
+ORDER BY tracks_cnt DESC, album;
